@@ -5,34 +5,25 @@ library(readxl)
 
 # Which parts of each sheet to extract
 tabs = list(sheet = 1:14,
-            labs = list(c("A5", "J5", "S5"),
-                        c("A5", "J5", "S5"),
-                        c("A5", "J5", "S5"),
-                        c("A5", "J5", "S5"),
-                        c("A5", "K5", "U5"),
-                        c("A5", "K5", "U5"),
-                        c("A5", "H5", "O5"),
-                        c("A5", "H5", "O5"),
-                        c("A5", "O5", "AC5"),
-                        c("A5", "O5", "AC5"),
-                        c("A5", "J5", "S5"),
-                        c("A5", "J5", "S5"),
-                        c("A5", "J5", "S5"),
-                        c("A5", "J5", "S5")),
-            data = list(c("A6:H15", "J6:Q15", "S6:Z15"),
-                        c("A6:H15", "J6:Q15", "S6:Z15"),
-                        c("A6:H15", "J6:Q15", "S6:Z15"),
-                        c("A6:H15", "J6:Q15", "S6:Z15"),
-                        c("A6:I15", "K6:S15", "U6:AC15"),
-                        c("A6:I15", "K6:S15", "U6:AC15"),
-                        c("A6:F15", "H6:M15", "O6:T15"),
-                        c("A6:F15", "H6:M15", "O6:T15"),
-                        c("A6:M15", "O6:AA15", "AC6:AO15"),
-                        c("A6:M15", "O6:AA15", "AC6:AO15"),
-                        c("A6:H15", "J6:Q15", "S6:Z15"),
-                        c("A6:H15", "J6:Q15", "S6:Z15"),
-                        c("A6:H15", "J6:Q15", "S6:Z15"),
-                        c("A6:H15", "J6:Q15", "S6:Z15")))
+            labs = list(c("A", "J", "S"),
+                        c("A", "J", "S"),
+                        c("A", "J", "S"),
+                        c("A", "J", "S"),
+                        c("A", "K", "U"),
+                        c("A", "K", "U"),
+                        c("A", "H", "O"),
+                        c("A", "H", "O"),
+                        c("A", "O", "AC"),
+                        c("A", "O", "AC"),
+                        c("A", "J", "S"),
+                        c("A", "J", "S"),
+                        c("A", "J", "S"),
+                        c("A", "J", "S")),
+            cols = c(8, 8, 8, 8,
+                     9, 9,
+                     6, 6,
+                     13, 13,
+                     8, 8, 8, 8))
 
 # Extract useful info from table name
 tab_grabber = function(var_txt, var_reg){
@@ -46,7 +37,7 @@ dl = lapply(tabs$sheet, function(i){
   # table names
   tab_labs = lapply(tabs$labs[[i]], function(j){
     read_excel("../Consumption_headline_Scotland_2019.xlsx",
-               sheet = paste0("Table_", i), range = j, col_names = F) %>% 
+               sheet = paste0("Table_", i), range = paste0(j, 5), col_names = F) %>% 
       separate(...1, into = c("table", "desc"), sep = ": ")
   })
   
