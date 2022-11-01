@@ -25,6 +25,9 @@ tabs = list(sheet = 1:14,
                      13, 13,
                      8, 8, 8, 8))
 
+start_row = 5
+rows = 10
+
 # Extract useful info from table name
 tab_grabber = function(var_txt, var_reg){
   x = str_extract(var_txt, var_reg)
@@ -37,7 +40,7 @@ dl = lapply(tabs$sheet, function(i){
   # table names
   tab_labs = lapply(tabs$labs[[i]], function(j){
     read_excel("../Consumption_headline_Scotland_2019.xlsx",
-               sheet = paste0("Table_", i), range = paste0(j, 5), col_names = F) %>% 
+               sheet = paste0("Table_", i), range = paste0(j, start_row), col_names = F) %>% 
       separate(...1, into = c("table", "desc"), sep = ": ")
   })
   
@@ -45,9 +48,10 @@ dl = lapply(tabs$sheet, function(i){
   tab_name = tab_grabber(tab_labs[[1]]$desc, "by.*$")
   
   # table data
-  tab_data = lapply(tabs$data[[i]], function(j){
+  tab_data = lapply(tabs$labs[[i]], function(j){
     read_excel("../Consumption_headline_Scotland_2019.xlsx",
-               sheet = paste0("Table_", i), range = j, col_names = T) %>% 
+               sheet = paste0("Table_", i),
+               range = anchored(paste0(j, start_row + 1), c(rows, tabs$cols[[i]])), col_names = T) %>% 
       pivot_longer(!Year, names_to = tab_name)
   })
   
