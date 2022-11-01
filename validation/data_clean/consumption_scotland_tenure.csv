@@ -1,0 +1,109 @@
+year,tenure,properties,mean_consumption,median_consumption,fuel
+2011,Owner-occupied,1018660,17000,15600,gas
+2011,Privately rented,132530,11800,10400,gas
+2011,"Council/
+Housing Association",384190,11900,11300,gas
+2011,Unknown,61660,20100,17800,gas
+2011,Total,1597040,15400,14000,gas
+2012,Owner-occupied,975980,16900,15600,gas
+2012,Privately rented,127820,11700,10300,gas
+2012,"Council/
+Housing Association",369350,11500,11000,gas
+2012,Unknown,60040,20100,17800,gas
+2012,Total,1533190,15300,13900,gas
+2013,Owner-occupied,939170,16500,15200,gas
+2013,Privately rented,156340,11100,9400,gas
+2013,"Council/
+Housing Association",386470,11500,10900,gas
+2013,Unknown,10760,15700,12500,gas
+2013,Total,1492740,14700,13300,gas
+2014,Owner-occupied,1048290,16200,14900,gas
+2014,Privately rented,181380,10800,9100,gas
+2014,"Council/
+Housing Association",435070,11200,10600,gas
+2014,Unknown,12480,15100,12000,gas
+2014,Total,1677210,14300,12900,gas
+2015,Owner-occupied,1056920,15900,14500,gas
+2015,Privately rented,183030,10600,8800,gas
+2015,"Council/
+Housing Association",437680,10900,10300,gas
+2015,Unknown,12880,14800,11800,gas
+2015,Total,1690510,14000,12600,gas
+2016,Owner-occupied,806530,15900,14400,gas
+2016,Privately rented,137030,10900,9000,gas
+2016,"Council/
+Housing Association",318160,11100,10400,gas
+2016,Unknown,9840,15100,11900,gas
+2016,Total,1271550,14100,12700,gas
+2017,Owner-occupied,1083530,15900,14500,gas
+2017,Privately rented,149430,11200,10200,gas
+2017,"Council/
+Housing Association",317010,10500,9900,gas
+2017,Unknown,4290,16800,13800,gas
+2017,Total,1554270,14300,13000,gas
+2018,Owner-occupied,1079500,15600,14200,gas
+2018,Privately rented,149050,11000,10000,gas
+2018,"Council/
+Housing Association",315270,10300,9700,gas
+2018,Unknown,4350,16600,13600,gas
+2018,Total,1548160,14100,12700,gas
+2019,Owner-occupied,1074540,15800,14400,gas
+2019,Privately rented,148580,11200,10100,gas
+2019,"Council/
+Housing Association",314240,10400,9800,gas
+2019,Unknown,4390,16700,13300,gas
+2019,Total,1541750,14200,12900,gas
+2011,Owner-occupied,1320260,4800,3900,electric
+2011,Privately rented,212440,4200,3200,electric
+2011,"Council/
+Housing Association",508980,4100,3100,electric
+2011,Unknown,127040,7800,6000,electric
+2011,Total,2168730,4700,3700,electric
+2012,Owner-occupied,1308300,4600,3700,electric
+2012,Privately rented,211250,4200,3100,electric
+2012,"Council/
+Housing Association",502630,4000,3000,electric
+2012,Unknown,124740,7800,6000,electric
+2012,Total,2146920,4600,3500,electric
+2013,Owner-occupied,1306000,4600,3700,electric
+2013,Privately rented,273470,3900,2900,electric
+2013,"Council/
+Housing Association",523250,3900,3000,electric
+2013,Unknown,24500,6100,4300,electric
+2013,Total,2127220,4400,3500,electric
+2014,Owner-occupied,1307150,4700,3700,electric
+2014,Privately rented,271990,3900,2900,electric
+2014,"Council/
+Housing Association",520550,3900,3000,electric
+2014,Unknown,24520,6100,4300,electric
+2014,Total,2124210,4400,3500,electric
+2015,Owner-occupied,1312720,4600,3600,electric
+2015,Privately rented,274270,3900,2800,electric
+2015,"Council/
+Housing Association",522280,3800,3000,electric
+2015,Unknown,25580,5900,4100,electric
+2015,Total,2134860,4300,3400,electric
+2016,Owner-occupied,1314300,4400,3500,electric
+2016,Privately rented,273870,3700,2700,electric
+2016,"Council/
+Housing Association",522130,3600,2800,electric
+2016,Unknown,25690,5700,3900,electric
+2016,Total,2135990,4100,3200,electric
+2017,Owner-occupied,1396900,4200,3300,electric
+2017,Privately rented,232310,3600,2700,electric
+2017,"Council/
+Housing Association",437540,3300,2500,electric
+2017,Unknown,14480,5700,3700,electric
+2017,Total,2081220,3900,3100,electric
+2018,Owner-occupied,1397730,4000,3200,electric
+2018,Privately rented,232130,3500,2600,electric
+2018,"Council/
+Housing Association",435710,3200,2400,electric
+2018,Unknown,14350,5600,3500,electric
+2018,Total,2079930,3800,3000,electric
+2019,Owner-occupied,1386210,4000,3200,electric
+2019,Privately rented,229240,3400,2500,electric
+2019,"Council/
+Housing Association",428940,3100,2300,electric
+2019,Unknown,14230,5400,3400,electric
+2019,Total,2058610,3700,2900,electric
