@@ -37,45 +37,39 @@ tab_grabber = function(var_txt, var_reg){
 
 # Run read and clean
 dl = lapply(tabs$sheet, function(i){
-  # table names
-  tab_labs = lapply(tabs$labs[[i]], function(j){
-    read_excel("../Consumption_headline_Scotland_2019.xlsx",
+  # table names and data
+  tab_data = lapply(tabs$labs[[i]], function(j){
+    tab_labs = read_excel("../Consumption_headline_Scotland_2019.xlsx",
                sheet = paste0("Table_", i), range = paste0(j, start_row), col_names = F) %>% 
       separate(...1, into = c("table", "desc"), sep = ": ")
-  })
-  
-  # Sheet info (data name)
-  tab_name = tab_grabber(tab_labs[[1]]$desc, "by.*$")
-  
-  # table data
-  tab_data = lapply(tabs$labs[[i]], function(j){
-    read_excel("../Consumption_headline_Scotland_2019.xlsx",
+    
+    # Sheet info (data names)
+    tab_name = tab_grabber(tab_labs$desc, "by.*$")
+    tab_col = tab_grabber(tab_labs$desc, "^.*consumption")
+    fuel = str_extract(tab_col, "gas|electric")
+    tab_col = str_remove(tab_col, "gas_|electricity_")
+    
+    # table data
+    x = read_excel("../Consumption_headline_Scotland_2019.xlsx",
                sheet = paste0("Table_", i),
-               range = anchored(paste0(j, start_row + 1), c(rows, tabs$cols[[i]])), col_names = T) %>% 
-      pivot_longer(!Year, names_to = tab_name)
+               range = anchored(paste0(j, start_row + 1), c(rows, tabs$cols[[i]])),
+               col_names = T) %>% 
+      pivot_longer(!Year, names_to = tab_name,
+                   values_to = if_else(is.na(tab_col), "properties", tab_col))
+    
+    # property counts or consumption?
+    if (is.na(fuel)){
+      x
+    } else {
+      x %>% 
+        add_column(fuel = fuel, .before = 3)
+    }
   })
-  
-  
-  # first 2 words for var description
-  # need mean/median and gas/electric
-  # which as col name? avg
-  # which as col? gas/elec
-  tab_col2 = tab_grabber(tab_labs[[2]]$desc, "^.*consumption")
-  tab_col3 = tab_grabber(tab_labs[[3]]$desc, "^.*consumption")
-  
-  fuel = str_extract(tab_col2, "gas|electric")
-  
-  tab_col2 = str_remove(tab_col2, "gas_|electricity_")
-  tab_col3 = str_remove(tab_col3, "gas_|electricity_")
   
   tab_data[[1]] %>% 
-    rename(properties = value) %>% 
-    inner_join(tab_data[[2]] %>% 
-                 rename(!!tab_col2 := value)) %>% 
-    inner_join(tab_data[[3]] %>% 
-                 rename(!!tab_col3 := value)) %>% 
-    rename_with(tolower) %>% 
-    add_column(fuel = fuel)
+    inner_join(tab_data[[2]]) %>% 
+    inner_join(tab_data[[3]]) %>% 
+    rename_with(tolower)
 })
 
 # Run group and write
