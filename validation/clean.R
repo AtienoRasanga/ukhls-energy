@@ -5,12 +5,13 @@ library(readxl)
 
 
 # Which parts of each file to extract
-tabs = list(sheet = 1:14,
-            cols = c(8, 8, 8, 8,
-                     9, 9,
-                     6, 6,
-                     13, 13,
-                     8, 8, 8, 8))
+# Where does data start
+# How many rows does it have?
+sheet = 1:14
+start_row = 5
+rows = 10
+
+
 
 # Create start column letters from table width
 # Works with 3 tables, with single blank row between
@@ -20,11 +21,6 @@ data_corners = function(start_col = 1, table_cols){
   excel_headers[c(start_col, table_cols + 2, 2 * table_cols + 3)]
 }
 
-# Where does data start
-# How many rows does it have?
-start_row = 5
-rows = 10
-
 # Extract useful info from table name
 tab_grabber = function(var_txt, var_reg){
   x = str_extract(var_txt, var_reg)
@@ -33,9 +29,19 @@ tab_grabber = function(var_txt, var_reg){
 }
 
 # Run read and clean
-dl = lapply(tabs$sheet, function(i){
+dl = lapply(sheet, function(i){
+
+  # How many columns?
+  col_count = tibble(x = as.character(read_excel("../Consumption_headline_Scotland_2019.xlsx",
+                                                 sheet = paste0("Table_", i),
+                                                 range = paste0("A", start_row, ":AZ", start_row),
+                                                 col_names = F))) %>% 
+    mutate(x = replace(x, x == "NA", NA),
+           is_na = if_else(is.na(x), 1, 0))
+  col_count = sum(col_count[1:which(str_detect(col_count$x, "Table .*b:.*$")), ]$is_na)
+  
   # table names and data
-  tab_data = lapply(data_corners(table_cols = tabs$col[i]), function(j){
+  tab_data = lapply(data_corners(table_cols = col_count), function(j){
     tab_labs = read_excel("../Consumption_headline_Scotland_2019.xlsx",
                sheet = paste0("Table_", i), range = paste0(j, start_row), col_names = F) %>% 
       separate(...1, into = c("table", "desc"), sep = ": ")
@@ -49,7 +55,7 @@ dl = lapply(tabs$sheet, function(i){
     # table data
     x = read_excel("../Consumption_headline_Scotland_2019.xlsx",
                sheet = paste0("Table_", i),
-               range = anchored(paste0(j, start_row + 1), c(rows, tabs$cols[i])),
+               range = anchored(paste0(j, start_row + 1), c(rows, col_count)),
                col_names = T) %>% 
       pivot_longer(!Year, names_to = tab_name,
                    values_to = if_else(is.na(tab_col), "properties", tab_col))
@@ -58,7 +64,7 @@ dl = lapply(tabs$sheet, function(i){
     if (is.na(fuel)){
       x
     } else {
-      x %>% 
+      x = x %>% 
         add_column(fuel = fuel, .before = 3)
     }
   })
